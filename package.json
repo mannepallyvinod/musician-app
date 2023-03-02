@@ -4,7 +4,7 @@
   "description": "A NodeJS REST API poc",
   "main": "app.js",
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js",
     "test": "jest",
     "start": "nodemon app.js",
     "start-dev": "nodemon app.js"
