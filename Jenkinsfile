@@ -15,8 +15,17 @@ pipeline {
            steps {
                // Build the Node.js/React application
               bat 'npm install'
-              bat 'npm run build'
            }
        }
+        stage('Audit') {
+            steps {
+                bat 'npm audit fix' 
+            }
+        }
+        stage('Build') {
+            steps {
+                bat 'npm run build'
+            }
+        }
     }
 }
