@@ -1,6 +1,10 @@
 pipeline {
     agent any 
-    
+    environment {
+    NODE_HOME = 'C:\\Program Files\\nodejs'
+    PATH = "${env.PATH};${NODE_HOME}\\bin"
+    APPDATA = 'C:\\Users\\VINOD KUMAR\\AppData\\Roaming'
+  }
     stages {
         stage('Checkout') {
             steps {
@@ -8,9 +12,16 @@ pipeline {
             }
         }
         stage('Build') {
+           steps {
+               // Build the Node.js/React application
+              bat 'npm install'
+              bat 'npm run build'
+           }
+       }
+        stage('Image') {
             steps {
                 scirpt {
-                    dockerImage = docker.build('music:latest', '.')
+                    dockerImage = docker.build("music")
                 }
             }
         }
