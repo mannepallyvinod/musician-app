@@ -10,7 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 scirpt {
-                    dockerImage = docker.build("music")
+                    dockerImage = docker.build('music:latest', '.')
                 }
             }
         }
