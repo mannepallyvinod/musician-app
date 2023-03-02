@@ -18,20 +18,5 @@ pipeline {
               bat 'npm run build'
            }
        }
-        stage('Image') {
-            steps {
-                scirpt {
-                    dockerImage = docker.build("music")
-                }
-            }
-        }
-        stage('Run container') {
-            steps {
-                script {
-                    dockerContainer = dockerImage.run("-p 3000:3000 -d")
-                    dockerContainerId = dockerContainer.id
-                }
-            }
-        }
     }
 }
