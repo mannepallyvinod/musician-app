@@ -11,6 +11,11 @@ pipeline {
                 git url: "https://github.com/mannepallyvinod/musician-app.git"
             }
         }
+        stage('Audit') {
+           steps {
+              bat 'npm audit fix' 
+            }
+        }
         stage('Install') {
            steps {
                // Build the Node.js/React application
@@ -18,10 +23,5 @@ pipeline {
               bat 'npm run build'
            }
        }
-        stage('Audit') {
-            steps {
-                bat 'npm audit fix' 
-            }
-        }
     }
 }
