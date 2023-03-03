@@ -3,7 +3,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: './index.js',
+    entry: ['babel-polyfill', './index.js'], // Add 'babel-polyfill' before './index.js'
     output: {
         path: path.resolve(__dirname, 'assets'),
         filename: 'bundle.js'
@@ -20,3 +20,4 @@ module.exports = {
         ]
     }
 };
+
