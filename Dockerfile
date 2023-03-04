@@ -9,6 +9,7 @@ COPY package*.json ./
 
 # Install dependencies
 RUN npm install
+RUN npm install webpack webpack-cli --save-dev
 
 # Copy source code
 COPY . .
