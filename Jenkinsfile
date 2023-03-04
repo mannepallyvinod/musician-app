@@ -1,27 +1,26 @@
 pipeline {
-    agent any 
-    environment {
-    NODE_HOME = 'C:\\Program Files\\nodejs'
-    PATH = "${env.PATH};${NODE_HOME}\\bin"
-    APPDATA = 'C:\\Users\\VINOD KUMAR\\AppData\\Roaming'
-  }
+    agent any
+    
     stages {
         stage('Checkout') {
             steps {
                 git url: "https://github.com/mannepallyvinod/musician-app.git"
             }
         }
-        stage('Audit') {
-           steps {
-              bat 'npm audit fix' 
+        stage('Build') {
+            steps {
+                script {
+                    dockerImage = docker.build("music")
+                }
             }
         }
-        stage('Install') {
-           steps {
-               // Build the Node.js/React application
-              bat 'npm install'
-              bat 'npm run build'
-           }
-       }
+        stage('Run') {
+            steps {
+                script {
+                    dockerContainer = dockerImage.run("-p 3000:3000 -d")
+                    dockerContainerId = dockerContainer.id
+                }
+            }
+        }
     }
 }
